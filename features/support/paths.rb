@@ -12,9 +12,12 @@ module NavigationHelpers
   #
   def path_to(page_name)
     case page_name
-
-    when /^the home\s?page$/
-      '/'
+  #When I go to the landing page
+  #Then I should see the welcome message
+    when /^the landing page$/ 
+      welcome_landing_page_path
+     
+     
 
     # Add more mappings here.
     # Here is an example that pulls values out of the Regexp:
