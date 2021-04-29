@@ -6,6 +6,11 @@ Rails.application.routes.draw do
  # root 'game#new'
   # You can have the root of your site routed with "root"
    root 'welcome#landing_page'
+   
+   post 'signup'=> 'welcome#signup'
+   post 'login' => 'welcome#login'
+   post 'register' => 'welcome#register'
+   post 'about' => 'welcome#about'
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
