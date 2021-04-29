@@ -1,7 +1,7 @@
 / This file is app/views/welcome/landing_page.html.haml
-%h2 
-  About Schedule Tracker
-%p
-  The project will be an overlook of how an employee and an employer can benefit from the 
-  automation of selecting different 
-  work shifts/slots availability on a weekly/monthly basis.
+%h1 
+  Welcome to Schedule Tracker
+%br
+.row
+  =button_to "About" ,about_path ,class: "btn btn-primary"
+  =button_to "Register" , register_path , class: "btn btn-primary"

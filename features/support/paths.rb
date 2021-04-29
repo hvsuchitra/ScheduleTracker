@@ -14,6 +14,7 @@ module NavigationHelpers
     case page_name
   #When I go to the landing page
   #Then I should see the welcome message
+      
     when /^the landing page$/ 
       welcome_landing_page_path
      
