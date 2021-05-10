@@ -6,4 +6,5 @@ Feature: Welcome
   
 Scenario: User sees the welcome message
   When I go to the landing page
+  And I press "About"
   Then I should see "About Schedule Tracker"

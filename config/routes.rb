@@ -1,17 +1,29 @@
 Rails.application.routes.draw do
   
-  get "welcome/landing_page"
+  resources :movies 
+  get "welcome/landing_page", :as => :welcome_landing_page
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
  # root 'game#new'
   # You can have the root of your site routed with "root"
-   root 'welcome#landing_page'
    
-   post 'signup'=> 'welcome#signup'
-   post 'login' => 'welcome#login'
-   post 'register' => 'welcome#register'
+     
    post 'about' => 'welcome#about'
-
+  
+   # You can have the root of your site routed with "root"
+  # root 'welcome#index'
+  
+  match '/auth/:provider/callback', :to => 'sessions#create', :via => [:get, :post]
+  match 'auth/failure', :to => 'sessions#failure', :via => [:get, :post]
+  match 'sessions/destroy', :as => 'logout', :via => [:get, :post]
+  get 'sessions/clear'
+  get 'sessions/debug'
+ 
+  resources :users, only: [:destroy]  do
+    resources :profiles, only: [:show, :edit, :update, :destroy]
+  end
+  
+  root 'welcome#landing_page'
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
 

@@ -13,10 +13,21 @@ module NavigationHelpers
   def path_to(page_name)
     case page_name
   #When I go to the landing page
-  #Then I should see the welcome message
+  #And I press "About"
+  #Then I should see About Schedule Tracker
       
-    when /^the landing page$/ 
+    #when /^the landing page$/
+    when /^the landing page$/
       welcome_landing_page_path
+    when /^I press "About"$/
+      about_path
+      
+    when /^the ScheduleTracker Landing Page$/
+      welcome_landing_page_path
+    
+    when /^the ScheduleTracker Home Page$/
+      movies_path
+      
      
      
 
