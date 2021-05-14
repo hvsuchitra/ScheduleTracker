@@ -26,7 +26,7 @@ module NavigationHelpers
       welcome_landing_page_path
     
     when /^the ScheduleTracker Home Page$/
-      movies_path
+      schedule_index_path
       
      
      

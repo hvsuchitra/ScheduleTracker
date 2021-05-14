@@ -53,7 +53,7 @@ RSpec.describe Authorization, type: :model do
         user.name = "SUNY Tester"
         user.email = "stester@binghamton.edu"
         user.id = {}
-        auth = FactoryGirl.build(:authorization, user: user)
+        auth = FactoryBot.build(:authorization, user: user)
         expect(auth.user_id).to be_nil
       end
     end

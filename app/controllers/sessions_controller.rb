@@ -18,7 +18,7 @@ class SessionsController < ApplicationController
         self.current_user= auth.user
         message = "Welcome back #{@user.name}! You have logged in via #{auth.provider}."
         flash[:notice] = message
-        redirect_to movies_path
+        redirect_to schedules_path
         
       else  
         @user = User.create_with_omniauth(auth_hash['info'])

@@ -45,6 +45,11 @@ ActiveRecord::Schema.define(version: 20210502153947) do
 
   add_index "profiles", ["user_id"], name: "index_profiles_on_user_id"
 
+  create_table "schedule", force: :cascade do |t|
+    t.string "fname"
+    t.string "lname"
+  end
+
   create_table "users", force: :cascade do |t|
     t.string   "name"
     t.string   "email"

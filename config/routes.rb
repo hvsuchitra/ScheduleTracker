@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
   
-  resources :movies 
+  resources :schedules
   get "welcome/landing_page", :as => :welcome_landing_page
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
