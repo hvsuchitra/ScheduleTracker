@@ -13,11 +13,35 @@
 # it.
 #
 # See http://rubydoc.info/gems/rspec-core/RSpec/Core/Configuration
+require 'omniauth'
+require 'factory_girl_rails'
+
+OmniAuth.config.test_mode = true
+omniauth_hash = { 'provider' => 'github',
+                  'uid' => "123456",
+                  'info' => {
+                      'name' => "SUNY Tester",
+                      'email' =>"stester@binghamton.edu"
+                  }
+}
+ 
+OmniAuth.config.add_mock(:github, omniauth_hash)
+
+
+
+
 RSpec.configure do |config|
   # rspec-expectations config goes here. You can use an alternate
   # assertion/expectation library such as wrong or the stdlib/minitest
   # assertions if you prefer.
+  config.before(:each) do
+    Rails.application.load_seed # loading seeds
+  end
+  
+  config.include FactoryGirl::Syntax::Methods 
   config.expect_with :rspec do |expectations|
+    
+   
     # This option will default to `true` in RSpec 4. It makes the `description`
     # and `failure_message` of custom matchers include text for helper methods
     # defined using `chain`, e.g.:
@@ -26,6 +50,7 @@ RSpec.configure do |config|
     # ...rather than:
     #     # => "be bigger than 2"
     expectations.include_chain_clauses_in_custom_matcher_descriptions = true
+    
   end
 
   # rspec-mocks config goes here. You can use an alternate test double

@@ -1,0 +1,7 @@
+/ This file is app/views/welcome/landing_page.html.haml
+%h1 
+  Welcome to Schedule Tracker
+%br
+.row
+  =button_to "About" ,about_path ,class: "btn btn-primary"
+  =button_to "Register or Login with Github" , '/auth/github' , class: "btn btn-primary"

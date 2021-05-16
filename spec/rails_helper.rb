@@ -54,7 +54,9 @@ RSpec.configure do |config|
   config.filter_rails_from_backtrace!
   # arbitrary gems may also be filtered via:
   # config.filter_gems_from_backtrace("gem name")
-  if RUBY_VERSION>='2.6.0'
+end
+Rails.application.env_config["omniauth.auth"] = OmniAuth.config.mock_auth[:github]   
+if RUBY_VERSION>='2.6.0'
   if Rails.version < '5'
     class ActionController::TestResponse < ActionDispatch::TestResponse
     def recycle! 
@@ -66,5 +68,4 @@ RSpec.configure do |config|
     end
   else puts "Monkeypatch for ActionController::TestResponse no longer needed"
   end
-end
 end

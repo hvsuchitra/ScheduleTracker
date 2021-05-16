@@ -1,0 +1,7 @@
+%h2 Create New Movie
+= form_tag schedules_path, :class => 'form' do
+  = label :fname, :lname, 'Name', :class => 'col-form-label'
+  = text_field :fname, :lname, :class => 'form-control'
+  %br/
+  = submit_tag 'Save Changes', :class => 'btn btn-primary'
+  = link_to 'Cancel', schedules_path, :class => 'btn btn-secondary'
