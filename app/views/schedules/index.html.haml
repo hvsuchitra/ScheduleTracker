@@ -1,11 +1,29 @@
 %h2 Given Slots
 
-%table#movies.table.table-striped.col-md-12
+%table#schedules.table.table-striped.col-md-12
   %thead
     %tr
+      %th Name
       %th Date
-      %th 
       %th Start Time 
       %th End Time
+      %th Availability
+      %th More Info
     %tr
+  %tbody
+    - @schedules.each do |schedule|
+      %tr
+        %td
+          = schedule.name
+        %td
+          = schedule.date
+        %td
+          = schedule.start_time
+        %td
+          = schedule.end_time
+        %td 
+          = schedule.availability 
+        %td
+          = link_to "More about #{schedule.name}", schedule_path(schedule)  
+= link_to 'Add new Slot', new_schedule_path, :class => 'btn btn-primary'
 

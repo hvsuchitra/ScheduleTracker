@@ -22,4 +22,4 @@ Scenario: login
   And I press "Register or Login with Github"
   Then I will see "Welcome back Tester SUNY! You have logged in via github." 
   #And I am on the landing page
-  And I will see "All Movies"
+  And I will see "Given Slots"

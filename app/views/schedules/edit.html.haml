@@ -1,5 +1,5 @@
-%h2 Create New Slot
-= form_tag schedules_path, :class => 'form' do
+%h2 Edit Existing Slots
+= form_tag schedule_path(@schedule), :method => :put do
   = label :schedule, :name, 'Name', :class => 'col-form-label'
   = text_field :schedule, :name, :class => 'form-control'
   = label :schedule, :date, 'Date', :class => 'col-form-label'
@@ -11,5 +11,5 @@
   = label :schedule, :availability, 'Availability', :class => 'col-form-label'
   = select :schedule, :availability, ['Available','Not Available'], {}, {:class => 'form-control col-1'}
   %br/
-  = submit_tag 'Save Changes', :class => 'btn btn-primary'
+  = submit_tag 'Update Slot Info', :class => 'btn btn-primary'
   = link_to 'Cancel', schedules_path, :class => 'btn btn-secondary'
