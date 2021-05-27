@@ -26,9 +26,16 @@ module NavigationHelpers
       welcome_landing_page_path
     
     when /^the ScheduleTracker Home Page$/
-      schedule_index_path
+      schedules_path
       
-     
+    when /^the New Schedule Page$/
+      new_schedule_path
+      
+    when /^the edit Schedule page for "([^"]*)"$/
+      edit_schedule_path(1, 2)
+      
+     when /^the show Schedule page for "([^"]*)"$/
+      schedule_path(1)
      
 
     # Add more mappings here.
@@ -36,7 +43,8 @@ module NavigationHelpers
     #
     #   when /^(.*)'s profile page$/i
     #     user_profile_path(User.find_by_login($1))
-
+    when /^the ScheduleTracker edit Profile Path for "([^"]*)"$/
+      edit_user_profile_path(1, 2)
     else
       begin
         page_name =~ /^the (.*) page$/

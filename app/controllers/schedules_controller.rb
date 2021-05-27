@@ -1,46 +1,53 @@
 class SchedulesController < ApplicationController
-  before_action :set_schedule, only: [:show, :edit, :update, :destroy]
+  
+  
+  def show
+   @schedule=set_schedule
+  end
   
   def index
     @schedules =Schedule.all
   end
   
-  def show
-     id = params[:id] # retrieve movie ID from URI route
-     @schedule = Schedule.find(id) 
+  def new
+    @schedule = Schedule.new
   end
   
-  def edit
-  end
   
-  def create
+   def create
     @schedule = Schedule.create!(schedule_params)
-    flash[:notice] = "#{@schedule.fname} was successfully created."
+    flash[:notice] = "Slot was successfully created."
     redirect_to schedules_path
   end
   
+  def edit
+    @schedule=set_schedule
+  end
+  
   def update
-    
+    @schedule=set_schedule
+    @schedule.update_attributes!(schedule_params)
+    flash[:notice] = "#{@schedule.name} was successfully updated."
+    redirect_to schedule_path(@schedule)
   end
   
   def destroy
-    
+    @schedule=set_schedule
+    @schedule.destroy
+    flash[:notice] = "Slot '#{@schedule.name}' deleted."
+    redirect_to schedules_path
   end
   
   private
   
-  def set_schedule
-    @schedule = Schedule.find(params[:id])
-  end
+ def set_schedule
+   @schedule = Schedule.find params[:id]
+ end
   
   
   def schedule_params
-    params.require(:schedule).permit(:fname, :lname)
+    params.require(:schedule).permit(:name, :date, :start_time, :end_time, :availability)
   end
-  
-  
-    
-  
   
   
 end

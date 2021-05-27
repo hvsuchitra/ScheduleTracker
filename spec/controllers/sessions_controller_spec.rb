@@ -40,7 +40,7 @@ RSpec.describe SessionsController, type: :controller do
           end
           it 'redirects to the home page' do
             post :create, provider: :github
-            expect(response).to redirect_to(movies_path) 
+            expect(response).to redirect_to(schedules_path) 
           end
           it 'checks to see that a previous authorization does not exist' do
             expect(Authorization).to receive(:exists?).with(OmniAuth.config.mock_auth[:github] ).and_return(false)

@@ -1,4 +1,5 @@
 class SessionsController < ApplicationController
+  skip_before_action :keep_out_unless_logged_in, only: [:create, :clear, :debug]
   def clear
     session.clear
     redirect_to welcome_landing_page_path  
@@ -24,11 +25,11 @@ class SessionsController < ApplicationController
         @user = User.create_with_omniauth(auth_hash['info'])
         auth = Authorization.create_with_omniauth(auth_hash, @user)
         session[:user_id] = auth.user.id
-        self.current_user= auth.user  
+        self.current_user= auth.user
+        @profile = @user.create_profile
         message = "Welcome #{@user.name}! You have signed up via #{auth.provider}."
       # message = "Welcome #{@user.name}! You have signed up via #{auth.provider}."
         flash[:notice] = message
-        @profile = @user.create_profile
         redirect_to edit_user_profile_path(@user,@profile)
       end 
     rescue ActiveRecord::RecordInvalid,  Exception => exception
