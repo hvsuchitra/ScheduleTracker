@@ -9,19 +9,15 @@ RSpec.describe SchedulesController, type: :controller do
 		@auth = Authorization.create!(provider: "github", uid: "123456", user_id: @user.id)
     session[:user_id] = @user.id
     @current_user= @user
-    #simulates invocation of set schedule in filter
     @schedule = Schedule.create!(name: 'Subbu', date: '2021-06-29', start_time:'6:00',end_time:'10:00',availability:'Available') 
   end
   
   describe '#index' do 
     let(:schedule1) {instance_double('Schedule', name: 'Subbu', date: '2021-06-29', start_time:'6:00', end_time:'10:00', availability:'Available')}
-    #let(:schedule2) {instance_double('Schedule', name: 'Subbu', date: '2021-06-29', start_time:'6:00', end_time:'10:00', availability:'Not Available')}
     let(:schedules) { [schedule1] }
 		it 'Retrieves all the schedules' do
-      #allow(Schedule).to receive(:all).and_return([schedule1, schedule2])
       allow(Schedule).to receive(:all).and_return([@schedule])
-      get :index
-        #expect(assigns(schedule1, schedule2)).to eq([:schedules])     
+      get :index     
         expect(assigns(:schedules)).to eq(Schedule.all)
     end
    end
@@ -76,7 +72,6 @@ RSpec.describe SchedulesController, type: :controller do
   
   describe '#edit' do
 		let(:id1) {'1'}
-    #let(:params) { {name: 'Subbu', date: '2021-06-29', start_time:'6:00',end_time:'10:00',availability:'Available'} }
     let(:schedule) { instance_double('Schedule',name: 'Subbu', date: '2021-06-29', start_time:'6:00',end_time:'10:00',availability:'Available' )}
     it 'Makes the schedule Available to the template' do
        get :edit, id: id1 
@@ -90,27 +85,19 @@ RSpec.describe SchedulesController, type: :controller do
   
   describe '#update' do
     let(:id1) {'1'}
-    #let(:params)  { {name: 'Subbu', date: '2021-06-29', start_time:'6:00',end_time:'10:00',availability:'Available'} }
     let(:params1) { {name: 'Subbu', date: '2021-06-29', start_time:'6:00', end_time:'10:00', availability:'Not Available'} }
     let(:schedule) { instance_double('Schedule', params1)}
-    #let(:params1)  {{"name"=>"Subbu", "date"=>"2021-06-29", "start_time"=>"8:00", "end_time"=>"10:00", "availability"=>"Not Available"} }
-    #let(:schedule){ double( name: 'Subbu', date: '2021-06-29', start_time:'6:00', end_time:'10:00', availability:'Available')} 
     let(:updated) { instance_double('Schedule', start_time:'8:00', end_time:'12:00')}
-    
-    # <Schedule id: 1, name: "Subbu", date: "2021-06-29", start_time: "6:00", end_time: "10:00", availability: "Available">
-    # <Schedule id: 1, name: "Subbu", date: "2021-06-29", start_time: "8:00", end_time: "10:00", availability: "Not Available">
-    #   {"schedule"=>{"name"=>"Subbu", "date"=>"2021-06-29", "start_time"=>"8:00", "end_time"=>"10:00", "availability"=>"Not Available"}, "id"=>"1", "controller"=>"schedules", "action"=>"update"}
-    
     it 'Updates the schedule attributes' do
       allow(controller).to receive(:set_schedule).and_return(schedule)
       expect(schedule).to receive(:update_attributes!).with(params1)
       put :update, id: id1, schedule: params1
     end
-    #it 'Makes the schedule available to the template' do
-     # allow(schedule).to receive(:update_attributes!).with(params1).and_return(updated)
-      #put :update, id: id1, schedule: params1
-      #expect(assigns(:schedule)).to eq(updated)
-    #end
+    it 'Makes the schedule available to the template' do
+      allow(controller).to receive(:set_schedule).and_return(schedule)
+      expect(schedule).to receive(:update_attributes!).with(params1)          
+      put :update, id: id1, schedule: params1
+    end
      it 'Sets a flash message' do
       allow(schedule).to receive(:update_attributes!).with(params1).and_return(updated)
       put :update, id: id1, schedule: params1
