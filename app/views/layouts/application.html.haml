@@ -12,5 +12,5 @@
       = render 'layouts/flash'
       %main#main
         = yield
-        - unless @action == 'login'
+        - unless @action == "login"
           = render "layouts/footer"
