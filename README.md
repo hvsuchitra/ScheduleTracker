@@ -1,3 +1,17 @@
+# Running The File
+Ruby Version: 2.6.6
+
+How to run:
+
+git clone https://github.com/hvsuchitra/ScheduleTracker.git
+
+bundle install
+
+rake db:migrate
+
+rails server -b 0.0.0.0
+
+
 # ScheduleTracker
 # Project Description:
 The project will be an overlook of how an employee and an employer can benefit from the automation of selecting different work shifts/slots availability on a weekly/monthly       basis.
